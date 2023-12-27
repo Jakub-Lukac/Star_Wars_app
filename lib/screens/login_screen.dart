@@ -9,12 +9,13 @@ class LoginScreen extends StatelessWidget {
   final _form = GlobalKey<FormState>();
 
   final TextEditingController _enteredEmailController = TextEditingController();
-  final TextEditingController _enteredPasswordController = TextEditingController();
+  final TextEditingController _enteredPasswordController =
+      TextEditingController();
 
   void _submit(BuildContext context) {
     if (_form.currentState!.validate()) {
       _form.currentState!.save();
-      Navigator.of(context).push(
+      Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) {
             return const HomeScreen();

@@ -32,7 +32,9 @@ class AddScreen extends StatelessWidget {
   final TextEditingController _enteredVehicleCostInCreditsController =
       TextEditingController();
 
-  bool _isTextFieldEnabled = true;
+  bool _isCharacterTextFieldEnabled = true;
+  bool _isMovieTextFieldEnabled = true;
+  bool _isVehicleTextFieldEnabled = true;
 
   void _submitCharacter(BuildContext context) {
     if (_formCharacter.currentState!.validate()) {
@@ -174,14 +176,17 @@ class AddScreen extends StatelessWidget {
               BlocBuilder<CharacterBloc, CharacterState>(
                 builder: (context, state) {
                   if (state is CharactersError) {
-                    _isTextFieldEnabled = !_isTextFieldEnabled;
+                    _isCharacterTextFieldEnabled = false;
+                  }
+                  else{
+                    _isCharacterTextFieldEnabled = true;
                   }
                   return _inputComponent(
                     context,
                     "ADD CHARACTERS",
                     colorPallete.characterColor,
                     _formCharacter,
-                    _isTextFieldEnabled,
+                    _isCharacterTextFieldEnabled,
                     colorPallete.characterColorOpacity,
                     TextInputType.name,
                     "Name",
@@ -198,14 +203,17 @@ class AddScreen extends StatelessWidget {
               BlocBuilder<MoviesBloc, MoviesState>(
                 builder: (context, state) {
                   if (state is MovieError) {
-                    _isTextFieldEnabled = !_isTextFieldEnabled;
+                    _isMovieTextFieldEnabled = false;
+                  }
+                  else{
+                    _isMovieTextFieldEnabled = true;
                   }
                   return _inputComponent(
                     context,
                     "ADD MOVIE",
                     colorPallete.movieColor,
                     _formMovie,
-                    _isTextFieldEnabled,
+                    _isMovieTextFieldEnabled,
                     colorPallete.movieColorOpacity,
                     TextInputType.name,
                     "Title",
@@ -222,14 +230,17 @@ class AddScreen extends StatelessWidget {
               BlocBuilder<VehiclesBloc, VehiclesState>(
                 builder: (context, state) {
                   if (state is VehiclesError) {
-                    _isTextFieldEnabled = !_isTextFieldEnabled;
+                    _isVehicleTextFieldEnabled = false;
+                  }
+                  else{
+                    _isVehicleTextFieldEnabled = true;
                   }
                   return _inputComponent(
                     context,
                     "ADD VEHICLE",
                     colorPallete.vehiclesColor,
                     _formVehicle,
-                    _isTextFieldEnabled,
+                    _isVehicleTextFieldEnabled,
                     colorPallete.vehiclesColorOpacity,
                     TextInputType.name,
                     "Name",
@@ -348,7 +359,7 @@ class AddScreen extends StatelessWidget {
                     top: 25,
                   ),
                   child: ElevatedButton(
-                    onPressed: _isTextFieldEnabled ? () => onPressed?.call(context) : null,
+                    onPressed: isTextFieldEnabled ? () => onPressed?.call(context) : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: backgroundColor,
                       padding: const EdgeInsets.symmetric(
